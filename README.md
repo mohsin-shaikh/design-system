@@ -9,3 +9,5 @@
 • Next JS
 • Mongo DB
 • Tailwind CSS
+• TypeScript
+• Moment JS
