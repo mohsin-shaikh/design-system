@@ -21,32 +21,31 @@ const Button1 = ({
     onClick,
     type = "button",
     value,
-    variant = "secondary",
+    variant = "primary",
     disabled = false
 }: Props) => {
-    const className = classNames(
-        `text-white`,
-        `bg-${variant}-700`,
-        `hover:bg-${variant}-800`,
-        `dark:bg-${variant}-600`,
-        `dark:hover:bg-${variant}-700`,
-        `dark:focus:ring-${variant}-800`,
-        `focus:ring-${variant}-300`,
-        `focus:ring-4`,
-        `font-medium`,
-        `rounded-lg`,
-        `text-sm`,
-        `px-5`,
-        `py-2.5`,
-        `mr-2`,
-        `mb-2`,
-        `focus:outline-none`
-    )
     return (
         <>
             <button
                 type={type}
-                className={className}
+                className={classNames(
+                    `text-white`,
+                    `bg-${variant}-700`,
+                    `hover:bg-${variant}-800`,
+                    `dark:bg-${variant}-600`,
+                    `dark:hover:bg-${variant}-700`,
+                    `dark:focus:ring-${variant}-800`,
+                    `focus:ring-${variant}-300`,
+                    `focus:ring-4`,
+                    `font-medium`,
+                    `rounded-lg`,
+                    `text-sm`,
+                    `px-5`,
+                    `py-2.5`,
+                    `mr-2`,
+                    `mb-2`,
+                    `focus:outline-none`
+                )}
                 onClick={onClick}
                 value={value}
                 disabled={disabled}
