@@ -8,7 +8,13 @@ export default function Home() {
                 onClick={() => alert()}
                 variant={'primary'}
             >
-                Submit
+                Primary
+            </Button>
+            <Button
+                onClick={() => alert()}
+                variant={'secondary'}
+            >
+                Secondary
             </Button>
             <Button
                 onClick={() => alert()}
