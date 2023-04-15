@@ -12,13 +12,7 @@ export default function Home() {
             </Button>
             <Button
                 onClick={() => alert()}
-                variant={'secondary'}
-            >
-                Secondary
-            </Button>
-            <Button
-                onClick={() => alert()}
-                variant={'secondary'}
+                variant={'primary'}
                 disabled={true}
             >
                 Disabled
