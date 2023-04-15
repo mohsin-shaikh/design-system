@@ -1,48 +1,49 @@
-import React, { ReactNode } from 'react';
-import classNames from 'classnames';
+import React, { type ComponentProps, type ReactNode, forwardRef } from 'react'
+import classNames from 'classnames'
 
-type ButtonProps = {
-    children: ReactNode;
-    onClick: () => void;
+export interface ButtonProps extends Omit<ComponentProps<'button'>, 'color' | 'ref'> {
     color?: 'primary' | 'secondary' | 'warning' | 'success' | 'danger' | 'gray';
     type?: 'button' | 'submit' | 'reset';
-    value?: string | number;
+    href?: string;
+    target?: string;
     disabled?: boolean;
     outlined?: boolean;
     size?: 'sm' | 'md' | 'lg';
     icon?: ReactNode;
     iconPosition?: 'before' | 'after';
     darkMode?: boolean;
-};
+}
 
 /**
- * TODO: 1. Primary (CTA, Form Submit), Secondary (Reset, Cancel, Close)
- * TODO: 2. Handle Button Type
- * TODO: 3.
+ * INFO: <HTMLButtonElement | HTMLAnchorElement, ButtonProps>
  */
-const Button = ({
+const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(({
     children,
-    onClick,
-    type = 'button',
-    value,
+    className,
     color = 'primary',
+    type = 'button',
+    href,
     disabled = false,
-    outlined=false,
+    outlined = false,
     size = 'md',
     icon,
-    iconPosition,
+    iconPosition = 'before',
     darkMode = false,
-}: ButtonProps) => {
-    const baseCN = {
+    ...props
+}, ref) => {
+    const isLink = typeof href !== 'undefined'
+    const Component = isLink ? 'a' : 'button'
+    const theirProps = props as object
+    const baseClassNames = {
         // Common
         'zuupee-button zuupee-button-size-{$size} inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset': true,
         'dark:focus:ring-offset-0': darkMode,
-        'opacity-70 cursor-not-allowed pointer-events-none': disabled,
+        'opacity-70 pointer-events-none cursor-not-allowed': disabled,
         'min-h-[2.25rem] px-4 text-sm': size === 'md',
         'min-h-[2rem] px-3 text-sm': size === 'sm',
         'min-h-[2.75rem] px-6 text-lg': size === 'lg',
-    } 
-    const defaultCN = {
+    }
+    const defaultClassNames = {
         // Default
         'text-white shadow focus:ring-white border-transparent': color !== 'secondary',
         'bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700': color === 'primary',
@@ -53,7 +54,7 @@ const Button = ({
         'text-gray-800 bg-white border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600': color === 'secondary',
         'dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-500 dark:text-gray-200 dark:focus:text-primary-400 dark:focus:border-primary-400 dark:focus:bg-gray-800': color === 'secondary' && darkMode,
     }
-    const outlineCN = {
+    const outlineClassNames = {
         // Outlined
         'shadow focus:ring-white': color !== 'secondary',
         'text-primary-600 border-primary-600 hover:bg-primary-600/20 focus:bg-primary-700/20 focus:ring-offset-primary-700': color === 'primary',
@@ -69,22 +70,21 @@ const Button = ({
         'dark:text-gray-400 dark:border-gray-400 dark:hover:bg-gray-400/20 dark:focus:bg-gray-600/20 dark:focus:ring-offset-gray-600': color === 'gray' && darkMode,
         'dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-500/20 dark:text-gray-200 dark:focus:text-primary-400 dark:focus:border-primary-400 dark:focus:bg-gray-800/20': color === 'secondary' && darkMode,
     }
-    
-    const className = classNames([baseCN, outlined ? outlineCN : defaultCN ])
-
-    console.log({className})
-
+    const mergedClassName = classNames([baseClassNames, outlined ? outlineClassNames : defaultClassNames, className])
     return (<>
-        <button
-            type={type}
-            className={className}
-            onClick={onClick}
-            value={value}
+        <Component
+            ref={ref as never}
+            href={href}
+            type={isLink ? undefined : type}
+            className={mergedClassName}
             disabled={disabled}
+            {...theirProps}
         >
             {children}
-        </button>
-    </>);
-};
+        </Component>
+    </>)
+})
 
-export default Button;
+Button.displayName = 'Button'
+
+export default Button
