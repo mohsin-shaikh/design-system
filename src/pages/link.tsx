@@ -20,23 +20,5 @@ export default function Links() {
             <Link color={'warning'} disabled={true}>Warning</Link>
             <Link color={'danger'} disabled={true}>Danger</Link>
         </div>
-        <h1>Outlined Link</h1>
-        <div className='flex space-x-8'>
-            <Link color={'primary'} outlined={true}>Primary</Link>
-            <Link color={'secondary'} outlined={true}>Secondary</Link>
-            <Link color={'gray'} outlined={true}>Gray</Link>
-            <Link color={'success'} outlined={true}>Success</Link>
-            <Link color={'warning'} outlined={true}>Warning</Link>
-            <Link color={'danger'} outlined={true}>Danger</Link>
-        </div>
-        <h1>Disabled Outlined Link</h1>
-        <div className='flex space-x-8'>
-            <Link color={'primary'} outlined={true} disabled={true}>Primary</Link>
-            <Link color={'secondary'} outlined={true} disabled={true}>Secondary</Link>
-            <Link color={'gray'} outlined={true} disabled={true}>Gray</Link>
-            <Link color={'success'} outlined={true} disabled={true}>Success</Link>
-            <Link color={'warning'} outlined={true} disabled={true}>Warning</Link>
-            <Link color={'danger'} outlined={true} disabled={true}>Danger</Link>
-        </div>
     </div>)
 }

@@ -7,7 +7,6 @@ export interface ButtonProps extends Omit<ComponentProps<'button'>, 'color' | 'r
     href?: string;
     target?: string;
     disabled?: boolean;
-    outlined?: boolean;
     size?: 'sm' | 'md' | 'lg';
     icon?: ReactNode;
     iconPosition?: 'before' | 'after';
@@ -24,7 +23,6 @@ const Link = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(({
     type = 'button',
     href,
     disabled = false,
-    outlined = false,
     size = 'md',
     icon,
     iconPosition = 'before',
