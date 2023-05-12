@@ -18,7 +18,7 @@ export function ButtonOrLink({ href, ...props }: ButtonOrLinkProps) {
     let content = <ButtonOrLink {...props} />;
 
     if (isLink) {
-        return <Link href={href}>{content}</Link>;
+        return <Link legacyBehavior href={href}>{content}</Link>;
     }
 
     return content;

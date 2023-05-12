@@ -1,32 +1,40 @@
-import { cva, VariantProps } from 'class-variance-authority';
-import { ButtonOrLink, ButtonOrLinkProps } from './ButtonOrLink';
+import { VariantProps, cva } from 'class-variance-authority'
+
+import { ButtonOrLink, ButtonOrLinkProps } from './ButtonOrLink'
 
 const buttonStyles = cva(
-    'flex items-center justify-center px-4 py-2 rounded font-medium focus:outline-none focus:ring-2 focus:ring-offset-white dark:focus:ring-offset-black focus:ring-offset-1 disabled:opacity-60 disabled:pointer-events-none hover:bg-opacity-80',
+    'inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset',
     {
         variants: {
-            intent: {
-                primary: 'bg-primary-500 text-white',
-                secondary:
-                    'bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-100 focus:ring-gray-500',
-                danger: 'bg-red-500 text-white focus:ring-red-500',
+            variant: {
+                solid: 'bg-primary-500 text-white hover:bg-primary-600',
+                outline: 'text-primary-500 border-2 border-primary-500 hover:bg-primary-500 hover:text-white',
+                ghost: 'text-primary-500 border-none hover:bg-primary-100',
+                soft: 'bg-primary-100 text-primary-500 hover:bg-primary-500 hover:text-white',
+                link: 'text-primary-500 bg-none border-none',
+            },
+            size: {
+                sm: 'min-h-[2rem] px-3 text-sm',
+                md: 'min-h-[2.25rem] px-4 text-md',
+                lg: 'min-h-[2.75rem] px-6 text-lg',
             },
             fullWidth: {
                 true: 'w-full',
             },
         },
         defaultVariants: {
-            intent: 'primary',
+            variant: 'solid',
+            size: 'md',
         },
-    },
-);
+    }
+)
 
 export interface ButtonProps
     extends ButtonOrLinkProps,
     VariantProps<typeof buttonStyles> { }
 
-export function Button({ intent, fullWidth, ...props }: ButtonProps) {
+export function Button({ variant, fullWidth, ...props }: ButtonProps) {
     return (
-        <ButtonOrLink className={buttonStyles({ intent, fullWidth })} {...props} />
-    );
+        <ButtonOrLink className={buttonStyles({ variant, fullWidth })} {...props} />
+    )
 }
